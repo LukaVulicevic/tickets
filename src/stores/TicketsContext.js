@@ -1,6 +1,6 @@
 import React, {createContext, useContext} from 'react'
 import { createTicketsStore } from './ticketsStore'
-import {useLocalStore} from 'mobx-react'
+import { useLocalStore } from 'mobx-react'
 
 const TicketsContext = createContext(null)
 

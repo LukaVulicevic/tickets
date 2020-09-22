@@ -1,28 +1,72 @@
 import React, {useState} from 'react'
-import {TicketForm} from '../components'
+import {Form} from '../components'
+import {useTicketsStore} from '../stores/TicketsContext'
+import {nanoid} from 'nanoid'
+import moment from 'moment'
 
 export function AddTicketLayout(){
 
-    const [name, setName] = useState('')
+    const [userName, setUserName] = useState('')
     const [title, setTitle] = useState('')
+    const [category, setCategory] = useState('hr')
+    const [categoryId, setCategoryId] = useState(null)
     const [urgency, setUrgency] = useState('low')
     const [description, setDescription] = useState('')
 
+    const ticketsStore = useTicketsStore()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        
+
+        ticketsStore.addTicket({
+            id: nanoid(),
+            userName,
+            title,
+            date: moment().format('Do MMMM YYYY, h:mm:ss a'),
+            category,
+            urgency,
+            description
+        })
+
+        setUserName('')
+        setTitle('')
+        setCategory('hr')
+        setUrgency('low')
+        setDescription('')
+    }
+
+
     return (
-        <TicketForm>
-            <TicketForm.Input 
+        <Form onSubmit={handleSubmit}>
+            <Form.Input 
                 type="text"
                 placeholder="Your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
             />
-            <TicketForm.Input 
+            <Form.Input 
                 type="text"
                 placeholder="Ticket title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
-            <TicketForm.Select
+            <Form.Select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+            >
+                <option value="hr"> 
+                    Human Resources 
+                </option>
+                <option value="acct"> 
+                    Accounting 
+                </option>
+                <option value="it"> 
+                    Information Technology 
+                </option>
+            </Form.Select>
+            <Form.Select
                 value={urgency}
                 onChange={(e) => setUrgency(e.target.value)}
             >
@@ -35,12 +79,12 @@ export function AddTicketLayout(){
                 <option value="high"> 
                     High 
                 </option>
-            </TicketForm.Select>
-            <TicketForm.TextArea 
+            </Form.Select>
+            <Form.TextArea 
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
-            <TicketForm.Submit> Submit </TicketForm.Submit>
-        </TicketForm>
+            <Form.Submit> Submit </Form.Submit>
+        </Form>
     )
 }

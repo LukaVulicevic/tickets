@@ -1,29 +1,29 @@
 import React from 'react'
 import './styles/form.css'
 
-export default function TicketForm ({children}) {
+export default function Form ({children, ...otherProps}) {
     return (
         <div className="form-container">
-            <form className="ticket-form">
+            <form className="ticket-form" {...otherProps}>
                 {children}
             </form>
         </div>
     )
 }
 
-TicketForm.Input = function TicketFormInput ({...restProps}) {
+Form.Input = function FormInput ({...restProps}) {
     return (
         <input className="ticket-form-input" {...restProps}/>
     )
 }
 
-TicketForm.TextArea = function TicketFormTextArea ({...restProps}) {
+Form.TextArea = function FormTextArea ({...restProps}) {
     return (
         <textarea className="ticket-form-text-area" {...restProps}/>
     )
 }
 
-TicketForm.Select = function TicketFormSelect ({children, ...restProps}) {
+Form.Select = function FormSelect ({children, ...restProps}) {
     return (
         <select 
             className="ticket-form-select" 
@@ -34,7 +34,7 @@ TicketForm.Select = function TicketFormSelect ({children, ...restProps}) {
     )
 }
 
-TicketForm.Submit = function TicketFormSubmit ({children, ...restProps}) {
+Form.Submit = function FormSubmit ({children, ...restProps}) {
     return (
         <button 
             className="ticket-form-btn"

@@ -5,7 +5,7 @@ import './styles/header.css'
 export default function Header ({children}) {
     return (
         <header>
-            <div className="container">
+            <div className="container header">
                 {children}
             </div>
         </header>
