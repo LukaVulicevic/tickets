@@ -82,7 +82,7 @@ export function createTicketsStore(){
             this.tickets.unshift(ticket)
         },
         removeTicket(id){
-            this.tickets = this.tickets.filter( ticket => ticket.id !== id)
+            this.tickets = this.tickets.filter( ticket => ticket.id !== Number(id))
         }
     }
 }
