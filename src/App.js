@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {Switch, Route} from 'react-router-dom'
-import {Home, AddTicket} from './pages'
+import {Home, AddTicket, EditTicket} from './pages'
 
 function App() {
   return (
@@ -12,6 +12,9 @@ function App() {
         </Route>
         <Route path='/addticket'>
           <AddTicket />
+        </Route>
+        <Route path='/edit/:ticketId'>
+          <EditTicket />
         </Route>
       </Switch>
     </div>

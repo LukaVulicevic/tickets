@@ -1,12 +1,12 @@
 import React from 'react'
 import {HeaderLayout} from '../layouts/header'
-import {AddTicketLayout} from '../layouts/add-ticket'
+import {EditTicketLayout} from '../layouts/edit-ticket'
 
 export default function AddTicket() {
     return (
         <>
             <HeaderLayout />
-            <AddTicketLayout />
+            <EditTicketLayout />
         </>
     )
 }

@@ -1,45 +1,48 @@
 import React, {useState} from 'react'
+import {useParams} from 'react-router-dom'
+import {useObserver} from 'mobx-react'
 import {Form} from '../components'
 import {useTicketsStore} from '../stores/TicketsContext'
-import {nanoid} from 'nanoid'
-import moment from 'moment'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-export function AddTicketLayout(){
-
-    const [userName, setUserName] = useState('')
-    const [title, setTitle] = useState('')
-    const [category, setCategory] = useState('hr')
-    const [categoryId, setCategoryId] = useState(null)
-    const [urgency, setUrgency] = useState('low')
-    const [description, setDescription] = useState('')
-
+export function EditTicketLayout() {
+    const {ticketId} = useParams()
     const ticketsStore = useTicketsStore()
+    const currentTicket = ticketsStore.tickets.find( ticket => ticket.id == ticketId)
 
-    const handleSubmit = (e) => {
+    const [userName, setUserName] = useState(currentTicket.userName)
+    const [title, setTitle] = useState(currentTicket.title)
+    const [category, setCategory] = useState(currentTicket.category)
+    const [urgency, setUrgency] = useState(currentTicket.urgency)
+    const [description, setDescription] = useState(currentTicket.description)
+
+    const handleEdit = (e) => {
         e.preventDefault()
 
-        
-
+        ticketsStore.removeTicket(ticketId)
         ticketsStore.addTicket({
-            id: nanoid(),
+            id: currentTicket.id,
             userName,
             title,
-            date: moment().format('Do MMMM YYYY, h:mm:ss a'),
+            date: currentTicket.date,
             category,
             urgency,
             description
         })
-
-        setUserName('')
-        setTitle('')
-        setCategory('hr')
-        setUrgency('low')
-        setDescription('')
+        toast.success('Edited', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        })
     }
 
-
-    return (
-        <Form onSubmit={handleSubmit}>
+    return useObserver( () => (
+        <Form onSubmit={handleEdit}>
             <Form.Input 
                 type="text"
                 placeholder="Your name"
@@ -84,7 +87,18 @@ export function AddTicketLayout(){
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
             />
-            <Form.Submit> Submit </Form.Submit>
+            <Form.Submit> Edit </Form.Submit>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Form>
-    )
+    ))
 }

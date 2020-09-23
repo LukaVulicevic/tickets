@@ -1,4 +1,3 @@
-import { isUsingStaticRendering } from 'mobx-react'
 import React, {useState} from 'react'
 import {TicketsList, PageCounter, Form} from '../components'
 import {useTicketsStore} from '../stores/TicketsContext'
@@ -8,8 +7,12 @@ export function TicketsListLayout (){
     const [ticketsPerPage, setTicketsPerPage] = useState(6)
     const [category, setCategory] = useState('all')
     const [urgency, setUrgency] = useState('all')
+    const [sort, setSort] = useState('default')
 
     const ticketsStore = useTicketsStore()
+
+    // Sorting logic
+
 
     // Filter logic
     const filteredTickets = ticketsStore.tickets.filter( ticket => {
@@ -33,6 +36,20 @@ export function TicketsListLayout (){
     return (
         <>
             <Form>
+                <Form.Select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                    >
+                    <option value="default"> 
+                        Default
+                    </option>
+                    <option value="new"> 
+                        Newest first
+                    </option>
+                    <option value="old"> 
+                        Oldest first
+                    </option>
+                </Form.Select>
                 <Form.Select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -69,7 +86,8 @@ export function TicketsListLayout (){
                 </Form.Select>
             </Form>
             <TicketsList>
-                {currentTickets.map (ticket => (
+            {currentTickets.length > 0 ?
+                currentTickets.map (ticket => (
                     <TicketsList.Item key={ticket.id}>
                         <TicketsList.ItemTitle>
                             {ticket.title}
@@ -93,7 +111,9 @@ export function TicketsListLayout (){
                             {ticket.description}
                         </TicketsList.ItemDesc>
                     </TicketsList.Item>
-                ))}
+                ))
+            :
+            <h2>Sorry there are no such tickets</h2>}
             </TicketsList>
             <PageCounter>
                 <PageCounter.Btn

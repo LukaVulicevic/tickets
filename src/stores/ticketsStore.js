@@ -10,68 +10,68 @@ export function createTicketsStore(){
                 id: 1,
                 categoryId: 100,
                 title: 'Random text 1',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'John',
+                date: '22/09/2020',
                 category: 'hr',
                 urgency: 'low',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             }, 
             {
-                id: 1,
+                id: 2,
                 categoryId: 200,
                 title: 'Refund',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'Luka',
+                date: '23/09/2020',
                 category: 'acct',
                 urgency: 'medium',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             },
             {
-                id: 1,
+                id: 3,
                 categoryId: 100,
                 title: 'Meeting room',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'Mario',
+                date: '24/09/2020',
                 category: 'hr',
                 urgency: 'high',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             },
             {
-                id: 1,
+                id: 4,
                 categoryId: 100,
                 title: 'New problem',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'Jim',
+                date: '24/09/2020',
                 category: 'hr',
                 urgency: 'medium',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             },
             {
-                id: 1,
+                id: 5,
                 categoryId: 200,
                 title: 'Refund',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'Jane Doe',
+                date: '12/09/2020',
                 category: 'acct',
                 urgency: 'high',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             },
             {
-                id: 1,
+                id: 6,
                 categoryId: 200,
                 title: 'Salaries',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'John Doe',
+                date: '14/09/2020',
                 category: 'acct',
                 urgency: 'low',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
             },
             {
-                id: 1,
+                id: 7,
                 categoryId: 300,
                 title: 'Laptop not working',
-                userName: 'Luka Vulicevic',
-                date: '22/09/2020 12:44',
+                userName: 'Luka',
+                date: '01/09/2020',
                 category: 'it',
                 urgency: 'high',
                 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean augue lorem, tempor a lectus vel, laoreet dignissim lacus.'
@@ -79,7 +79,7 @@ export function createTicketsStore(){
 
         ],
         addTicket(ticket){
-            this.tickets.push(ticket)
+            this.tickets.unshift(ticket)
         },
         removeTicket(id){
             this.tickets = this.tickets.filter( ticket => ticket.id !== id)

@@ -28,7 +28,7 @@ TicketsList.ItemTitle = function TicketsListItemTitle ({children}) {
 
 TicketsList.ItemEdit = function TicketsListItemEdit ({itemId}) {
     return (
-        <Link to={`/${itemId}`} className="ticket-edit">
+        <Link to={`/edit/${itemId}`} className="ticket-edit">
             <h2>
                 <i class="ri-settings-2-fill"></i>
             </h2>
